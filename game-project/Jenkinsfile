@@ -31,8 +31,9 @@ pipeline {
   steps {
     dir('game-project') {
       bat 'npm install --legacy-peer-deps'}
+      }
     }
-
+      
     stage('Run ToyCarLoader Unit Test') {
       steps {
         bat 'npx vitest run src/loaders/tests/ToyCarLoader.test.js'
