@@ -21,13 +21,19 @@ pipeline {
       }
     }
 
+    stage('Show workspace files') {
+      steps {
+        bat 'dir'
+      }
+    }
+
     stage('Install dependencies') {
       steps { bat 'npm install --legacy-peer-deps' }
     }
 
     stage('Run ToyCarLoader Unit Test') {
       steps {
-        bat 'npx vitest run game-project/src/loaders/tests/ToyCarLoader.test.js'
+        bat 'npx vitest run src/loaders/tests/ToyCarLoader.test.js'
       }
     }
 
