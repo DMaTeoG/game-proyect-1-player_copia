@@ -33,7 +33,7 @@ pipeline {
 
     stage('Run ToyCarLoader Unit Test') {
       steps {
-        bat 'npx vitest run src/loaders/tests/ToyCarLoader.test.js'
+       bat 'npx vitest run src/loaders/tests/ToyCarLoader.test.js'
       }
     }
 
