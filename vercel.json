@@ -1,5 +1,11 @@
 {
-  "rootDirectory": "game-project",
+  "version": 2,
+  "builds": [
+    {
+      "src": "game-project/package.json",
+      "use": "@vercel/node"
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/$1" }
   ]
