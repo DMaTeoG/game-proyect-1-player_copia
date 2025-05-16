@@ -1,3 +1,6 @@
 {
-  "rootDirectory": "game-project"
+  "rootDirectory": "game-project",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/$1" }
+  ]
 }
