@@ -1,100 +1,53 @@
 pipeline {
-    agent any
+  agent any
 
-    environment {
-        // Configuración recomendada para proyectos React/Vite
-        CI = "false" 
-        NODE_ENV = "production"
-        VERCEL_TOKEN = credentials('vercel-token') // Correcto para credenciales seguras
+  environment {
+    CI = "false" // Evita que React trate los warnings como errores
+    VERCEL_TOKEN = credentials('vercel-token')
+  }
+
+  tools {
+    nodejs 'Node 20' // Instalación limpia de NodeJS
+  }
+
+  stages {
+    stage('Clean workspace') {
+      steps { deleteDir() }
     }
 
-    tools {
-        nodejs 'Node 20' // Buena práctica especificar versión
+    stage('Checkout') {
+      steps {
+        git url: 'https://github.com/DMaTeoG/game-proyect-1-player_copia.git'
+      }
     }
 
-    stages {
-        stage('Clean Workspace') {
-            steps {
-                cleanWs() // Mejor que deleteDir() para limpieza controlada
-            }
-        }
-
-        stage('Checkout Code') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: 'main']],
-                    extensions: [[
-                        $class: 'CleanBeforeCheckout' // Limpieza adicional
-                    ]],
-                    userRemoteConfigs: [[
-                        url: 'https://github.com/su-usuario/surepositorio.git',
-                        credentialsId: 'github-credentials' // Recomendado para repos privados
-                    ]]
-                ])
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    // Instalación más robusta con manejo de caché
-                    if (isUnix()) {
-                        sh 'npm ci --prefer-offline --legacy-peer-deps'
-                    } else {
-                        bat 'npm ci --prefer-offline --legacy-peer-deps'
-                    }
-                }
-            }
-        }
-
-        stage('Unit Tests') {
-            steps {
-                script {
-                    try {
-                        // Ejecución con reportes JUnit
-                        if (isUnix()) {
-                            sh 'npx vitest run src/Experience/World/__tests__/Robot.test.js --reporter=junit --outputFile=test-results/junit.xml'
-                        } else {
-                            bat 'npx vitest run src/Experience/World/__tests__/Robot.test.js --reporter=junit --outputFile=test-results/junit.xml'
-                        }
-                    } finally {
-                        // Archivar resultados siempre
-                        junit 'test-results/**/*.xml'
-                    }
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    if (isUnix()) {
-                        sh 'npm run build'
-                    } else {
-                        bat 'npm run build'
-                    }
-                    
-                    // Archivar artefactos
-                    archiveArtifacts artifacts: 'dist/**/*', fingerprint: true
-                }
-            }
-        }
+    stage('Install dependencies') {
+      steps { bat 'npm install --legacy-peer-deps' }
     }
 
-    post {
-        always {
-            // Notificación opcional
-            script {
-                def status = currentBuild.result ?: 'SUCCESS'
-                echo "Pipeline finalizado: ${status}"
-            }
-        }
-        failure {
-            // slackSend(color: 'danger', message: "Build Fallido: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
-        }
-        success {
-            // slackSend(color: 'good', message: "Build Exitoso: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
-        }
+    stage('Run ToyCarLoader Unit Test') {
+      steps {
+        bat 'npx vitest run game-project/src/loaders/tests/ToyCarLoader.test.js'
+      }
     }
+
+    stage('Build app') {
+      steps { bat 'npm run build' }
+    }
+
+    stage('Deploy to Vercel') {
+      steps {
+        bat "npx vercel --prod --token=%VERCEL_TOKEN% --confirm"
+      }
+    }
+  }
+
+  post {
+    success {
+      echo '✅ Deploy exitoso en Vercel.'
+    }
+    failure {
+      echo '❌ El pipeline falló.'
+    }
+  }
 }
