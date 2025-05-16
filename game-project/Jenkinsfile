@@ -28,7 +28,9 @@ pipeline {
     }
 
     stage('Install dependencies') {
-      steps { bat 'npm install --legacy-peer-deps' }
+  steps {
+    dir('game-project') {
+      bat 'npm install --legacy-peer-deps'}
     }
 
     stage('Run ToyCarLoader Unit Test') {
