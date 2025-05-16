@@ -17,7 +17,7 @@ pipeline {
 
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/DMaTeoG/game-proyect-1-player_copia.git'
+        git branch: 'main', url: 'https://github.com/DMaTeoG/game-proyect-1-player_copia.git'
       }
     }
 
@@ -33,7 +33,7 @@ pipeline {
 
     stage('Run ToyCarLoader Unit Test') {
       steps {
-       bat 'npx vitest run src/loaders/tests/ToyCarLoader.test.js'
+        bat 'npx vitest run src/loaders/tests/ToyCarLoader.test.js'
       }
     }
 
