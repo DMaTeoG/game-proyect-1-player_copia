@@ -32,6 +32,16 @@ export default [
         path: '/models/Robot/Robot.glb'
     },
     {
+        name: 'car_red',
+        type: 'glbfModel',
+        path: '/models/toycar/car_red.glb'
+    },
+    {
+        name: 'car_blue',
+        type: 'glbfModel',
+        path: '/models/toycar/car_blue.glb'
+    },
+    {
         "name": "barn",
         "type": "gltfModel",
         "path": "/models/toycar/barn.glb"
