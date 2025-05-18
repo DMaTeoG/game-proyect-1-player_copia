@@ -4,5 +4,11 @@
         "x": 0.0,
         "y": 0.0,
         "z": 0.0
+    },
+    {
+        "id": "carRed",
+        "model": "car_red",
+        "position": [1, 0, -3],
+        "scale": [1, 1, 1]
     }
 ]
