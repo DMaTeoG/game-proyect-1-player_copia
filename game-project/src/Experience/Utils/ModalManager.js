@@ -1,4 +1,4 @@
-import { narrar } from './Utils/ScreenReader.js'
+import { narrar } from '../Utils/ScreenReader.js'
 
 export default class ModalManager {
   constructor({ container = document.body } = {}) {

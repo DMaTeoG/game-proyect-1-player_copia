@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { narrar } from '../Experience/Utils/ScreenReader.js'
+import { narrar } from '../Utils/ScreenReader.js'
 import Sound from './Sound.js'
 
 export default class Prize {

@@ -9,7 +9,7 @@ import ThirdPersonCamera from './ThirdPersonCamera.js'
 import Sound from './Sound.js'
 import AmbientSound from './AmbientSound.js'
 import MobileControls from '../../controls/MobileControls.js'
-import { narrar } from '../Experience/Utils/ScreenReader.js'
+import { narrar } from '../Utils/ScreenReader.js'
 
 export default class World {
     constructor(experience) {
