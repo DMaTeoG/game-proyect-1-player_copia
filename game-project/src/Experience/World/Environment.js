@@ -24,6 +24,9 @@ export default class Environment {
         this.sunLight.shadow.normalBias = 0.05
         this.sunLight.position.set(3.5, 2, -1.25)
         this.scene.add(this.sunLight)
+        this.ambientLight = new THREE.AmbientLight('#ffffff', 0.5)
+        this.scene.add(this.ambientLight)
+
 
         // Debug
         if (this.debug.active) {

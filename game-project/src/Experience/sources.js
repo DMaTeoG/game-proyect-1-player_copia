@@ -31,9 +31,9 @@ export default [
         type: 'gltfModel',
         path: '/models/Robot/Robot.glb'
     },
-    /*{
+    {
         name: 'car_red',
-        type: 'glbfModel',
+        type: 'gltfModel',
         path: '/models/toycar/car_red.glb'
     },
     /*{
