@@ -36,11 +36,11 @@ export default [
         type: 'glbfModel',
         path: '/models/toycar/car_red.glb'
     },
-    {
+    /*{
         name: 'car_blue',
         type: 'glbfModel',
         path: '/models/toycar/car_blue.glb'
-    },
+    },*/
     {
         "name": "barn",
         "type": "gltfModel",

@@ -10,11 +10,5 @@
         "model": "car_red",
         "position": [1, 0, -3],
         "scale": [1, 1, 1]
-    },
-    {
-        "id": "carBlue",
-        "model": "car_blue",
-        "position": [2, 0, -3],
-        "scale": [1, 1, 1]
     }
 ]
