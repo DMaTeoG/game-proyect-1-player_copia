@@ -1,4 +1,5 @@
-// src/Utils/ModalManager.js
+import { narrar } from './Utils/ScreenReader.js'
+
 export default class ModalManager {
   constructor({ container = document.body } = {}) {
     this.container = container
@@ -6,7 +7,6 @@ export default class ModalManager {
   }
 
   _createModal() {
-    // Overlay
     this.overlay = document.createElement('div')
     Object.assign(this.overlay.style, {
       position: 'fixed',
@@ -22,7 +22,6 @@ export default class ModalManager {
     })
     this.container.appendChild(this.overlay)
 
-    // Modal box
     this.box = document.createElement('div')
     Object.assign(this.box.style, {
       background: '#222',
@@ -35,7 +34,6 @@ export default class ModalManager {
     })
     this.overlay.appendChild(this.box)
 
-    // Icon
     this.icon = document.createElement('div')
     Object.assign(this.icon.style, {
       fontSize: '32px',
@@ -43,7 +41,6 @@ export default class ModalManager {
     })
     this.box.appendChild(this.icon)
 
-    // Message text
     this.text = document.createElement('div')
     Object.assign(this.text.style, {
       fontSize: '16px',
@@ -52,7 +49,6 @@ export default class ModalManager {
     })
     this.box.appendChild(this.text)
 
-    // Dynamic buttons container
     this.buttonsContainer = document.createElement('div')
     Object.assign(this.buttonsContainer.style, {
       display: 'flex',
@@ -62,7 +58,6 @@ export default class ModalManager {
     })
     this.box.appendChild(this.buttonsContainer)
 
-    // Close button
     this.closeBtn = document.createElement('button')
     this.closeBtn.innerText = 'Cerrar'
     Object.assign(this.closeBtn.style, {
@@ -82,10 +77,10 @@ export default class ModalManager {
     this.text.innerText = message
     this.overlay.style.display = 'flex'
 
-    // Limpiar botones anteriores
+    narrar(message)
+
     this.buttonsContainer.innerHTML = ''
 
-    // Agregar botones personalizados si se proporcionan
     if (Array.isArray(buttons) && buttons.length > 0) {
       buttons.forEach(btn => {
         const button = document.createElement('button')
