@@ -87,6 +87,16 @@ export default [
         "path": "/models/toycar/chimney_detailed.glb"
     },
     {
+        "name": "car_red",
+        "type": "glbfModel",
+        "path": "/models/toycar/car_red.glb"
+    },
+    {
+        "name": "car_blue",
+        "type": "glbfModel",
+        "path": "/models/toycar/car_blue.glb"
+    },
+    {
         "name": "cilinder2",
         "type": "gltfModel",
         "path": "/models/toycar/cilinder2.glb"
